@@ -55,6 +55,5 @@ if __name__ == '__main__':
     model = lda_init(input_file_1)
     pickle.dump(model, open(args.output_file_1, "wb"))
 
-    topic_dict = display_topics(lda_init(input_file_1), tf_feature_names)
-    pickle.dump(model, open(args.output_file_2, "wb"))
-    
+    topic_dict = display_topics(lda_init(arg.input_file_1), args.input_file_2)
+    pickle.dump(topic_dict, open(args.output_file_2, "wb"))
