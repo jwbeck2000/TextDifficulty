@@ -52,8 +52,8 @@ if __name__ == '__main__':
 	parser.add_argument('output_file_2', help='Dict of top words in n_topics (pkl)')
 	args = parser.parse_args()
 
-    model = lda_init(input_file_1)
+    model = lda_init(args.input_file_1)
     pickle.dump(model, open(args.output_file_1, "wb"))
 
-    topic_dict = display_topics(lda_init(arg.input_file_1), args.input_file_2)
+    topic_dict = display_topics(model, args.input_file_2)
     pickle.dump(topic_dict, open(args.output_file_2, "wb"))
