@@ -11,7 +11,7 @@ def count_vector(input_file_1, input_file_2, input_file_3):
 	vectorizer = CountVectorizer()
 
 	X_train = vectorizer.fit_transform(text_train)
-	X_train_feature_names = vectorizer.get_feature_names_out()
+	X_train_feature_names = vectorizer.get_feature_names()
 
 	X_test = vectorizer.transform(text_test)
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 	parser.add_argument('output_file_4', help='Feature names for the training data (pkl)')
 	args = parser.parse_args()
 
-	X_train, X_test, A_test = count_vector(args.input_file_1, args.input_file_2, args.input_file_3)
+	X_train, X_test, A_test, X_train_feature_names = count_vector(args.input_file_1, args.input_file_2, args.input_file_3)
 	pickle.dump(X_train, open(args.output_file_1, "wb"))
 	pickle.dump(X_test, open(args.output_file_2, "wb"))
 	pickle.dump(A_test, open(args.output_file_3, "wb"))
