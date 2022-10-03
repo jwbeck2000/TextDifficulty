@@ -7,8 +7,8 @@ outputs/X_train_count.pickle outputs/X_test_count.pickle outputs/X_train_feature
 outputs/X_train_tfidf.pickle outputs/X_test_tfidf.pickle: tfidf_vector.py outputs/x_train.npy outputs/x_test.npy outputs/test_data.npy
 	python3 tfidf_vector.py outputs/x_train.npy outputs/x_test.npy outputs/test_data.npy outputs/X_train_tfidf.pickle outputs/X_test_tfidf.pickle outputs/A_test_tfidf.pickle
 
-outputs/x_train.npy outputs/x_test.npy outputs/y_train.npy outputs/y_test.npy: train_test.py outputs/combined.csv
-	python3 train_test.py outputs/combined.csv outputs/x_train.npy outputs/x_test.npy outputs/y_train.npy outputs/y_test.npy
+outputs/x_train.npy outputs/x_test.npy outputs/y_train.npy outputs/y_test.npy: train_test.py outputs/clean_combined.csv
+	python3 train_test.py outputs/clean_combined.csv outputs/x_train.npy outputs/x_test.npy outputs/y_train.npy outputs/y_test.npy
 
 outputs/test_data.npy: test_file.py data/Wiki_Test.csv
 	python3 test_file.py inputs/Wiki_Test.csv outputs/test_data.npy
