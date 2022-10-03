@@ -14,8 +14,6 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 from sklearn.dummy import DummyClassifier
 
-
-wiki_train_df = pd.read_csv('data/WikiLarge_Train.csv')
 def clean(input_file):
     input_file = input_file.dropna()
     tokenized_train_items = []
@@ -29,6 +27,17 @@ def clean(input_file):
     #print(tokenized_train_items[:50])
     return pd.DataFrame(tokenized_train_items)
 
-cleaned_wiki_train_df=clean(wiki_train_df)
-cleaned_wiki_train_df.to_csv('data/cleaned_wiki_train.csv',index=False) 
+if __name__ == '__main__':
+	import argparse
+
+	parser = argparse.ArgumentParser()
+	parser.add_argument('input_file_1', help='Filename to be cleaned')
+
+	parser.add_argument('output_file_1', help='Cleaned output filename')
+	args = parser.parse_args()
+	
+	wiki_train_df = pd.read_csv(input_file_1)	
+	cleaned_wiki_train_df=clean(wiki_train_df)
+	cleaned_wiki_train_df.to_csv(output_file_1,index=False) 
+    
     
