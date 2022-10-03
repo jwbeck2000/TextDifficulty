@@ -9,7 +9,7 @@ def train_test(input_file):
 
 	random_seed = 42
 
-	x = df['original_text'].values
+	x = df['text_processed'].values #KB changed 'original_text' tp 'text_processed' with change of data_clean.py to KB's attempt
 	y = df['label'].values
 
 	text_train, text_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=random_seed)
@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	import argparse
 
 	parser = argparse.ArgumentParser()
-	parser.add_argument('input_file', help='Combined data (CSV)')
+	parser.add_argument('input_file', help='Combined Cleaned data (CSV)')
 	parser.add_argument('output_file_1', help='X training data (CSV)')
 	parser.add_argument('output_file_2', help='X test data (CSV)')
 	parser.add_argument('output_file_3', help='Y training data (CSV)')
