@@ -15,18 +15,37 @@ from tqdm import tqdm
 from sklearn.dummy import DummyClassifier
 
 def clean(input_file_1):
-    wiki_train_df = pd.read_csv(input_file_1)
-    wiki_train_df = wiki_train_df.dropna()
-    tokenized_train_items = []
-    stop_words=set(stopwords.words('english'))
+    # wiki_train_df = pd.read_csv(input_file_1)
+    # wiki_train_df = wiki_train_df.dropna()
+    # tokenized_train_items = []
+    # stop_words=set(stopwords.words('english'))
+    #
+    # for text in tqdm(wiki_train_df.original_text):
+    #     matches=re.findall(r'\w+',text)
+    #     matches = re.findall(r"\D+",text)
+    #     matches=[w for w in matches if not w.lower() in stop_words]
+    #     tokenized_train_items.append(matches)
+    # #print(tokenized_train_items[:50])
+    # return pd.DataFrame(tokenized_train_items)
 
-    for text in tqdm(wiki_train_df.original_text):
-        matches=re.findall(r'\w+',text)
-        matches = re.findall(r"\D+",text)
-        matches=[w for w in matches if not w.lower() in stop_words]
-        tokenized_train_items.append(matches)
-    #print(tokenized_train_items[:50])
-    return pd.DataFrame(tokenized_train_items)
+    #KB's data cleaning
+
+    combined_df = pd.read_csv(input_file_1)
+
+    combined_df['text_processed'] = \
+    combined_df['original_text'].map(lambda x: re.sub('[,\.!?\-;:]','',x))
+
+    combined_df['text_processed'] = \
+    combined_df['text_processed'].map(lambda x: x.lower())
+
+    combined_df['text_processed'] = \
+    combined_df['text_processed'].map(lambda x: re.sub('lrb','',x))
+
+    combined_df['text_processed'] = \
+    combined_df['text_processed'].map(lambda x: re.sub('rrb','',x))
+
+    return combined_df
+
 
 if __name__ == '__main__':
 	import argparse
