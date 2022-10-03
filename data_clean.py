@@ -1,4 +1,4 @@
-import gensim
+# import gensim
 import gzip
 import json
 import matplotlib.pyplot as plt
@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 from sklearn.dummy import DummyClassifier
 
-def clean(input_file):
+def clean(input_file_1):
     wiki_train_df = pd.read_csv(input_file_1)
     wiki_train_df = wiki_train_df.dropna()
     tokenized_train_items = []
