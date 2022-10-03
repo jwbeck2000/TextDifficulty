@@ -12,6 +12,9 @@ outputs/x_train.npy outputs/x_test.npy outputs/y_train.npy outputs/y_test.npy: t
 
 outputs/test_data.npy: test_file.py data/Wiki_Test.csv
 	python3 test_file.py inputs/Wiki_Test.csv outputs/test_data.npy
-
+	
+outputs/clean_combined.csv: data_clean.py outputs/combined.csv
+	python3 data_clean.py outputs/combined.csv outputs/clean_combined.csv
+	
 outputs/combined.csv: combine.py data/Wiki_Train_1.csv data/Wiki_Train_2.csv data/Wiki_Train_3.csv
 	python3 combine.py data/Wiki_Train_1.csv data/Wiki_Train_2.csv data/Wiki_Train_3.csv outputs/combined.csv
