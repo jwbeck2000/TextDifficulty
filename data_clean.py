@@ -61,5 +61,5 @@ if __name__ == '__main__':
 	args = parser.parse_args()
 
 	# wiki_train_df = pd.read_csv(input_file_1) Moved above - KB
-	cleaned_wiki_train_df=clean(args.input_file_1) #changed input from wiki_train_df to input_file_1
+	cleaned_wiki_train_df=clean(pd.read_csv(args.input_file_1)) #changed input from wiki_train_df to input_file_1
 	cleaned_wiki_train_df.to_csv(args.output_file_1,index=False) #added 'args' in front of output
