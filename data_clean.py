@@ -1,4 +1,3 @@
-# import gensim
 import gzip
 import json
 import matplotlib.pyplot as plt
@@ -11,40 +10,45 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
-from tqdm import tqdm
 from sklearn.dummy import DummyClassifier
 
-def clean(input_file_1):
-    # wiki_train_df = pd.read_csv(input_file_1)
-    # wiki_train_df = wiki_train_df.dropna()
-    # tokenized_train_items = []
-    # stop_words=set(stopwords.words('english'))
-    #
-    # for text in tqdm(wiki_train_df.original_text):
-    #     matches=re.findall(r'\w+',text)
-    #     matches = re.findall(r"\D+",text)
-    #     matches=[w for w in matches if not w.lower() in stop_words]
-    #     tokenized_train_items.append(matches)
-    # #print(tokenized_train_items[:50])
-    # return pd.DataFrame(tokenized_train_items)
+def clean(input_file):
+    input_file = input_file.dropna()
+    stop_words=set(stopwords.words('english'))
+    
+    input_file['text_processed'] = (input_file['original_text']
+                .apply(lambda x: x.lower())                   #lower text
+                .apply(lambda y: re.sub(r'[^\w\s]', '', y) )  #removes special characters
+                .apply(lambda n: re.sub(r'[\W+\d+]',' ', n))  #remove non-alpha numeric charcaters
+                .apply(lambda z: re.sub(r'\n','', z))         #remove new line
+                .apply(lambda i: re.sub(r'\s+',' ', i))       #removes extra whitespace
+                .apply(lambda d: re.sub('lrb','',d))          #remove double lrb
+                .apply(lambda sd: re.sub('rrb','',sd))        #remove single rrb
+                .apply(lambda ss: re.sub('å','',ss))
+                .apply(lambda s: [i for i in s.split() if not i in stop_words])   #remove stopwords
+                .apply(lambda j: " ".join(j)))                #join all text back together                     
+        
+    #print(input_file.head(20))
+    return input_file
+
 
     #KB's data cleaning
 
-    combined_df = pd.read_csv(input_file_1)
+    #combined_df = pd.read_csv(input_file_1)
 
-    combined_df['text_processed'] = \
-    combined_df['original_text'].map(lambda x: re.sub('[,\.!?\-;:]','',x))
+    #combined_df['text_processed'] = \
+    #combined_df['original_text'].map(lambda x: re.sub('[,\.!?\-;:]','',x))
 
-    combined_df['text_processed'] = \
-    combined_df['text_processed'].map(lambda x: x.lower())
+    #combined_df['text_processed'] = \
+    #combined_df['text_processed'].map(lambda x: x.lower())
 
-    combined_df['text_processed'] = \
-    combined_df['text_processed'].map(lambda x: re.sub('lrb','',x))
+    #combined_df['text_processed'] = \
+    #combined_df['text_processed'].map(lambda x: re.sub('lrb','',x))
 
-    combined_df['text_processed'] = \
-    combined_df['text_processed'].map(lambda x: re.sub('rrb','',x))
+    #combined_df['text_processed'] = \
+    #combined_df['text_processed'].map(lambda x: re.sub('rrb','',x))
 
-    return combined_df
+    #return combined_df
 
 
 if __name__ == '__main__':
