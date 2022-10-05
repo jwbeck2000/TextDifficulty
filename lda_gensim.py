@@ -41,9 +41,10 @@ def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lis
     d_list = df.text_processed.values.tolist()
 
     data_words = list(sent_to_words(d_list))
-
     id2word = corpora.Dictionary(data_words)
-
     texts = data_words
-
     corpus = [id2word.doc2bow(text) for text in texts]
+
+    num_topics = 10
+    lda_model = gensim.models.LdaMulticore(corpus = corpus,id2word = id2word, num_topics = num_topics)
+    doc_lda = lda_model[corpus]
