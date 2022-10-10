@@ -12,7 +12,7 @@ def create_wordcloud(input_file_1):
     for i in range(0,2):
         df = None
         df = cleaned_combined_df[cleaned_combined_df['label']==i]
-        list = ','.join(list(df['original_text']))
+        list = ','.join(list(df['text_processed']))
 
         wordcloud = WordCloud(background_color = 'white', contour_width = 3, countour_color = 'steelblue')
         viz = wordcloud.generate(list)
