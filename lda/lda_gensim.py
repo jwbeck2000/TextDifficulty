@@ -34,8 +34,8 @@ import pyLDAvis
 def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lists with docs
 
     def sent_to_words(sents):
-    for sent in sents:
-        yield(gensim.utils.simple_preprocess(str(sent),deacc = True))
+        for sent in sents:
+            yield(gensim.utils.simple_preprocess(str(sent),deacc = True))
 
     df = pd.read_csv(input_file_1)
     d_list = df.text_processed.values.tolist()
@@ -61,22 +61,23 @@ def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lis
         # with open(LDAvis_data_filepath, 'wb') as f:
             # pickle.dump(LDAvis_prepared, f)
     # load the pre-prepared pyLDAvis data from disk
-    with open(LDAvis_data_filepath, 'rb') as f:
-        LDAvis_prepared = pickle.load(f)
-    pyLDAvis.save_html(LDAvis_prepared, '../outputs/ldavis_prepared_10..html')
+    # with open(LDAvis_data_filepath, 'rb') as f:
+    #     LDAvis_prepared = pickle.load(f)
+    # pyLDAvis.save_html(LDAvis_prepared, '../outputs/ldavis_prepared_10..html')
 
-    if __name__ == '__main__':
-    	import argparse
 
-    	parser = argparse.ArgumentParser()
-    	parser.add_argument('input_file_1', help='Cleaned combined data (CSV)')
+if __name__ == '__main__':
+    import argparse
 
-    	parser.add_argument('output_file_1', help='LDAvis (pkl)')
-    	# parser.add_argument('output_file_2', help='LDAvis HTML (html)')
-    	args = parser.parse_args()
+	parser = argparse.ArgumentParser()
+	parser.add_argument('input_file_1', help='Cleaned combined data (CSV)')
 
-    	LDAvis = lda_gensim(args.input_file_1)
-    	pickle.dump(LDAvis, open(args.output_file_1, "wb"))
+	parser.add_argument('output_file_1', help='LDAvis (pkl)')
+	# parser.add_argument('output_file_2', help='LDAvis HTML (html)')
+	args = parser.parse_args()
 
-        LDAvis_prepared = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
-        pickle.dump(LDAvis_prepared, open(args.output_file_1, 'wb'))
+	LDAvis = lda_gensim(args.input_file_1)
+	pickle.dump(LDAvis, open(args.output_file_1, "wb"))
+
+    LDAvis_prepared = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
+    pickle.dump(LDAvis_prepared, open(args.output_file_1, 'wb'))
