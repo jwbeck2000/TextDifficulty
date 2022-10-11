@@ -23,7 +23,7 @@ from tqdm import tqdm
 from sklearn.dummy import DummyClassifier
 
 import os
-from wordcloud import wordcloud
+# from wordcloud import wordcloud
 import gensim
 from gensim.utils import simple_preprocess
 import gensim.corpora as corpora
@@ -56,7 +56,7 @@ def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lis
     LDAvis_data_filepath = '../outputs/ldavis_prepared_10.pickle'
     # # this is a bit time consuming - make the if statement True
     # # if you want to execute visualization prep yourself
-    if 1 == 1:
+    # if 1 == 1:
         # LDAvis_prepared = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
         # with open(LDAvis_data_filepath, 'wb') as f:
             # pickle.dump(LDAvis_prepared, f)
@@ -67,17 +67,18 @@ def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lis
 
 
 if __name__ == '__main__':
+
     import argparse
 
-	parser = argparse.ArgumentParser()
-	parser.add_argument('input_file_1', help='Cleaned combined data (CSV)')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input_file_1', help='Cleaned combined data (CSV)')
 
-	parser.add_argument('output_file_1', help='LDAvis (pkl)')
-	# parser.add_argument('output_file_2', help='LDAvis HTML (html)')
-	args = parser.parse_args()
+    parser.add_argument('output_file_1', help='LDAvis (pkl)')
+    # parser.add_argument('output_file_2', help='LDAvis HTML (html)')
+    args = parser.parse_args()
 
-	LDAvis = lda_gensim(args.input_file_1)
-	pickle.dump(LDAvis, open(args.output_file_1, "wb"))
+    LDAvis = lda_gensim(args.input_file_1)
+    pickle.dump(LDAvis, open(args.output_file_1, "wb"))
 
     LDAvis_prepared = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
     pickle.dump(LDAvis_prepared, open(args.output_file_1, 'wb'))
