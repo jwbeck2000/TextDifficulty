@@ -54,6 +54,8 @@ def lda_gensim(input_file_1): #take in combined_cleaned.csv and make list of lis
     pyLDAvis.enable_notebook()
 
     LDAvis_data_filepath = '../outputs/ldavis_prepared_10.pickle'
+
+    return pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
     # # this is a bit time consuming - make the if statement True
     # # if you want to execute visualization prep yourself
     # if 1 == 1:
