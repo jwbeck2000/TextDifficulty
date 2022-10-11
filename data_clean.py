@@ -18,7 +18,7 @@ def clean(input_file):
     
     input_file['text_processed'] = (input_file['original_text']
                 .apply(lambda x: x.lower())                   #lower text
-                .apply(lambda y: re.sub(r'[^\w\s]', '', y) )  #removes special characters
+                .apply(lambda y: re.sub(r'[^a-zA-Z0-9 ]', '', y))  #removes special characters
                 .apply(lambda n: re.sub(r'[\W+\d+]',' ', n))  #remove non-alpha numeric charcaters
                 .apply(lambda z: re.sub(r'\n','', z))         #remove new line
                 .apply(lambda i: re.sub(r'\s+',' ', i))       #removes extra whitespace
