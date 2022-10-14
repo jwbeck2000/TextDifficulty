@@ -69,6 +69,7 @@ if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument('file', help='Filename for data extraction')
+	parser.add_argument('output_file', help='Output file name')
 
 	#GENERATE FEATURES
 	#Age of Acquisition Data
@@ -87,7 +88,7 @@ if __name__ == '__main__':
 	dale_chall_list = pd.read_csv('data/dale_chall.csv').values.flatten().tolist()
 					
 	lemmatizer = WordNetLemmatizer()
-	wiki_train_df = pd.read_csv(input_file_1)
+	wiki_train_df = pd.read_csv(file)
 	#Extract features and add the corresponding column to clean_combined which is the training data
 	combine_aoa,combine_concreteness,combine_dalechall,aoa_groups = feature_extraction(wiki_train_df)
 	#Create a column for percents of words in each aoa group
@@ -98,5 +99,5 @@ if __name__ == '__main__':
 	wiki_train_df['avg_concreteness'] = combine_concreteness
 	wiki_train_df['perc_dale_chall'] = combine_dalechall
 	#print(wiki_train_df.head())                    
-	#write it back to clean_combined.csv
-	wiki_train_df.to_csv(file,index=False) 
+	#write it back to the output file
+	wiki_train_df.to_csv(output_file,index=False) 
