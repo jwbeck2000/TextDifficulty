@@ -3,10 +3,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
 
 def tfidf_vector(input_file_1, input_file_2, input_file_3):
-	
-	text_train = np.load(input_file_1, allow_pickle=True)
-	text_test = np.load(input_file_2, allow_pickle=True)
-	test_data = np.load(input_file_3, allow_pickle=True)
+
+	text_train = np.load(input_file_1, allow_pickle=True).astype(str)
+	text_test = np.load(input_file_2, allow_pickle=True).astype(str)
+	test_data = np.load(input_file_3, allow_pickle=True).astype(str)
 
 	vectorizer = TfidfVectorizer()
 
