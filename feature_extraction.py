@@ -88,7 +88,7 @@ if __name__ == '__main__':
 	dale_chall_list = pd.read_csv('data/dale_chall.csv').values.flatten().tolist()
 					
 	lemmatizer = WordNetLemmatizer()
-	wiki_train_df = pd.read_csv(file)
+	wiki_train_df = pd.read_csv(args.file)
 	#Extract features and add the corresponding column to clean_combined which is the training data
 	combine_aoa,combine_concreteness,combine_dalechall,aoa_groups = feature_extraction(wiki_train_df)
 	#Create a column for percents of words in each aoa group
@@ -100,4 +100,4 @@ if __name__ == '__main__':
 	wiki_train_df['perc_dale_chall'] = combine_dalechall
 	#print(wiki_train_df.head())                    
 	#write it back to the output file
-	wiki_train_df.to_csv(output_file,index=False) 
+	wiki_train_df.to_csv(args.output_file,index=False) 
