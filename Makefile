@@ -16,11 +16,11 @@ outputs/test_data.npy: test_file.py data/Wiki_Test.csv
 outputs/wordcloud_zero.png outputs/wordcloud_one.png: word_clouds.py outputs/clean_combined.csv
 	python3 word_clouds.py outputs/clean_combined.csv outputs/wordcloud_zero.png outputs/wordcloud_one.png
 
-outputs/clean_combined.csv: data_clean.py outputs/combined.csv
-	python3 data_clean.py outputs/combined.csv outputs/clean_combined.csv
+outputs/clean_combined.csv: feature_extraction.py outputs/clean_combined_tmp.csv
+	python3 feature_extraction.py outputs/clean_combined_tmp.csv outputs/clean_combined.csv
 
-outputs/clean_combined.csv: feature_extraction.py outputs/clean_combined.csv
-	python3 feature_extraction.py outputs/clean_combined.csv outputs/clean_combined.csv
-	
+outputs/clean_combined_tmp.csv: data_clean.py outputs/combined.csv
+		python3 data_clean.py outputs/combined.csv outputs/clean_combined_tmp.csv
+
 outputs/combined.csv: combine.py data/Wiki_Train_1.csv data/Wiki_Train_2.csv data/Wiki_Train_3.csv
 	python3 combine.py data/Wiki_Train_1.csv data/Wiki_Train_2.csv data/Wiki_Train_3.csv outputs/combined.csv
